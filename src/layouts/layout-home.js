@@ -8,9 +8,10 @@
 import React, { useState } from "react"
 // import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import SectionHeader from ".././template-parts/section-header"
+import SectionHeader from "../template-parts/components/section-header"
+import 'bootstrap/dist/css/bootstrap.min.css'
 // import SectionFooter from "./section-footer"
-// import SectionHero from "./section-hero"
+import SectionHero from "../template-parts/components/section-hero"
 // import SectionAboutIntro from "./section-about-intro"
 // import SectionAboutIntro2 from "./section-about-intro-2"
 // import SectionServices from "./section-services"
@@ -52,8 +53,9 @@ const LayoutHome = ({ children }) => {
         {/* <div className="l-wrapper">
           <div className="l-document"> */}
             <SectionHeader siteTitle={data.site.siteMetadata.title} />
-            {/* <yOffsetContext.Provider value={{ offsetY, setOffsetY }}>
+            {/* <yOffsetContext.Provider value={{ offsetY, setOffsetY }}> */}
               <SectionHero />
+               {/*
             </yOffsetContext.Provider>
             <SectionAboutIntro />
             <SectionServices />
@@ -65,7 +67,7 @@ const LayoutHome = ({ children }) => {
           </div> */}
         {/* </div> */}
       {/* </inViewContext.Provider> */}
-    // </>
+    </> 
     
   )
 }

@@ -1,14 +1,8 @@
 import React from "react";
-import LayoutHome from ".././layouts/layout-home"
-
+import LayoutHome from ".././layouts/layout-home";
 
 const Home = () => {
-    return ( 
-<LayoutHome>
-'hello'
-</LayoutHome>
-  
-     );
-}
- 
+  return <LayoutHome></LayoutHome>;
+};
+
 export default Home;
