@@ -1,6 +1,6 @@
-import styled from "styled-components"
-import { device } from "../mixins"
-import { colors } from "../variables"
+import styled from "styled-components";
+import { device } from "../mixins";
+import { colors } from "../variables";
 
 export const SectionHeroStyles = styled.div`
   position: relative;
@@ -26,18 +26,18 @@ export const SectionHeroStyles = styled.div`
     svg {
       height: 100%;
       .cls-1 {
-        fill: ${props => (props.dark ? colors.primary : colors.white)};
+        fill: ${(props) => (props.dark ? colors.primary : colors.white)};
       }
     }
 
     @keyframes fadeIn {
-        0% {
-          visibility: hidden;
-        }
-        100% {
-          visibility: visible;
-        }
+      0% {
+        visibility: hidden;
       }
+      100% {
+        visibility: visible;
+      }
+    }
 
     .hero-title-container {
       position: absolute;
@@ -82,7 +82,7 @@ export const SectionHeroStyles = styled.div`
             margin-bottom: 15px;
           }
 
-          .icon {
+          .icon img {
             width: 70px;
             @media ${device.md} {
               width: 100px;
@@ -185,6 +185,7 @@ export const SectionHeroStyles = styled.div`
         }
       }
     }
+    
 
     .slick-slide {
       height: 100vh;
@@ -223,7 +224,9 @@ export const SectionHeroStyles = styled.div`
 
       &.slick-active {
         .slider-container {
+    
           .bgSlide {
+           
             animation: scale 9s;
             animation-timing-function: linear;
             transition: 9s all;
@@ -232,6 +235,7 @@ export const SectionHeroStyles = styled.div`
       }
 
       .slider-container {
+   
         .bgSlide {
           background-attachment: fixed;
           background-repeat: no-repeat;
@@ -241,11 +245,13 @@ export const SectionHeroStyles = styled.div`
           animation-timing-function: linear;
           transition: 9s all;
           transform: scale(1.2);
-          @media ${device.lg} {
-            height: 100vh;
-          }
+          position: absolute !important;
+          top: 0;
+          left: 0;
+          width: 100% !important;
+
           &:after {
-            /* transform: translateY(${props => props.offsetY}px); */
+            /* transform: translateY(${(props) => props.offsetY}px); */
             transition: 0.5s all;
             background-attachment: fixed;
           }
@@ -309,6 +315,22 @@ export const SectionHeroStyles = styled.div`
       z-index: 1;
     }
 
+    .slick-slider {
+      .slick-list {
+        height:100%;
+        .slick-track {
+          position: relative;
+     
+          .slick-slide {
+            position: absolute;
+            left: 0 !important;
+            top: 0;
+            height: 100%;
+          }
+        }
+      }
+    }
+
     .slick-slider.slick-initialized {
       overflow: hidden;
       height: 100vh;
@@ -320,10 +342,11 @@ export const SectionHeroStyles = styled.div`
     .overlay {
       position: absolute;
       width: 100%;
-      height: 100%;
+      height: 100vh;
+      z-index: 1;
       top: 0;
       left: 0;
       background-color: rgba(38, 67, 102, 0.4);
     }
   }
-`
+`;

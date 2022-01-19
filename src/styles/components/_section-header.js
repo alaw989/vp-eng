@@ -1,17 +1,16 @@
-import styled from "styled-components"
-import { device } from "../mixins"
-import { colors } from "../variables"
+import styled from "styled-components";
+import { device } from "../mixins";
+import { colors } from "../variables";
 
 export const SectionHeaderStyles = styled.div`
   font-family: Roboto Condensed, sans-serif;
   z-index: 2;
   width: 100%;
-  
+
   .nav-container {
     z-index: 2;
     position: fixed;
     width: 100%;
-    background-color: blue;
 
     &[data-hero-view="not-in-view"] {
       .logo {
@@ -20,46 +19,49 @@ export const SectionHeaderStyles = styled.div`
           /* color: ${colors.primary}; */
         }
         .icon {
-
         }
       }
     }
-    a {
-      text-decoration: none;
-      .logo {
-        display: flex;
-        color: ${colors.white};
-        top: 45px;
-        left: 85px;
-        z-index: 10;
 
-        .gatsby-image-wrapper {
-          height: 105px;
-          width: 200px;
-        }
-
-        .top {
-          font-size: 3rem;
+    .logo-container {
+      max-width: 100px; 
+      a {
+        text-decoration: none;
+        .logo {
           display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
+          color: ${colors.white};
+          top: 45px;
+          left: 85px;
+          z-index: 10;
 
-          .icon {
-            width: 30px;
-            display: flex; 
-            img {
-              width: 100%; 
-            }
+          .gatsby-image-wrapper {
+            height: 105px;
+            width: 200px;
+          }
 
-            svg {
-              position: relative;
+          .top {
+            font-size: 3rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            .icon {
+              width: 30px;
+              display: flex;
+              img {
+                width: 100%;
+              }
+
+              svg {
+                position: relative;
+              }
             }
           }
-        }
-        .bottom {
-          font-size: 3rem;
-          font-weight: 400;
+          .bottom {
+            font-size: 3rem;
+            font-weight: 400;
+          }
         }
       }
     }
@@ -296,4 +298,4 @@ export const SectionHeaderStyles = styled.div`
       top: 0;
     }
   } */
-`
+`;
