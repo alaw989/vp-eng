@@ -1,10 +1,10 @@
 import { useStaticQuery, graphql } from "gatsby";
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { SectionHeroStyles } from "../../styles/components/_section-hero.js";
-import Slider from "react-slick";
-import { getImage, GatsbyImage } from "gatsby-plugin-image";
+// import Slider from "react-slick";
+// import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import BackgroundImage from "gatsby-background-image";
-import { BgImage } from "gbimage-bridge";
+
 import { convertToBgImage } from "gbimage-bridge";
 import parse from "html-react-parser";
 import plus from "../../images/plus-icon.png";
@@ -13,7 +13,7 @@ import plus from "../../images/plus-icon.png";
 // import { inViewContext, yOffsetContext } from "../Contexts/siteContext"
 // import FadeIn from "react-fade-in"
 
-const SectionHero = ({}) => {
+const SectionHero = () => {
   const data = useStaticQuery(graphql`
     query heroQuery {
       allWp {
@@ -43,32 +43,11 @@ const SectionHero = ({}) => {
     }
   `);
 
-  // console.log(
-  //   data.allWp.nodes[0].themeOptions.acfThemeOptions.homepage.heroSlider
-  // );
 
   const home_slider =
     data.allWp.nodes[0].themeOptions.acfThemeOptions.homepage.heroSlider;
 
-  const [active, setActive] = useState("active");
   const [index, setIndex] = useState(1);
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 6000,
-    autoplaySpeed: 9000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    fade: true,
-    arrows: false,
-    useCSS: true,
-    beforeChange: (oldIndex, newIndex) => {
-      active == "active" ? setActive("active2") : setActive("active");
-      setIndex(newIndex + 1);
-    },
-  };
 
   //   const { ref, inView, entry } = useInView({
   //     threshold: 0,
@@ -81,6 +60,22 @@ const SectionHero = ({}) => {
   // Page Y Offset State
   //   const { offsetY } = useContext(yOffsetContext)
 
+  let [count, setCount] = useState(0);
+  const [active, setActive] = useState("active");
+  useEffect(() => {
+    const countUp = () => {
+      setCount((count += 1));
+      active === "active" ? setActive("active2") : setActive("active");
+   
+      if (count == 2) {
+        count = -1
+      }
+    };
+
+   setInterval(countUp, 9000);
+  
+  }, []);
+  console.log(active)
   return (
     // <FadeIn transitionDuration={2000}>
     <SectionHeroStyles>
@@ -115,11 +110,40 @@ const SectionHero = ({}) => {
             <div className="progress-bar">
               <div className="progress-inner" data-active={active}></div>
             </div>
-            <div className="slide-number">{index}</div>
+            <div className="slide-number">{count + 1}</div>
           </div>
         </div>
 
-        <Slider {...settings}>
+        <div className="home-carousel">
+          {home_slider.map((slide, index) => {
+            const image = slide.image.localFile.childImageSharp.gatsbyImageData;
+            const bgImage = convertToBgImage(image);
+
+            return (
+              <div
+                className={`bg-container ${
+                  index === count ? "slide showing" : "slide"
+                }`}
+                key={index}
+              >
+                <BackgroundImage
+                  {...bgImage}
+                  backgroundColor={`#040e18`}
+                  className="background"
+                  style={{
+                    // backgroundPosition: `0px -${offsetY * 0.3}px`,
+                    backgroundSize: `cover`,
+                  }}
+                >
+                  {" "}
+                </BackgroundImage>
+                <div className="bgText">{parse(slide.text)}</div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* <Slider {...settings}>
           {home_slider.map((slide, index) => {
             const image = slide.image.localFile.childImageSharp.gatsbyImageData;
             const bgImage = convertToBgImage(image);
@@ -140,7 +164,7 @@ const SectionHero = ({}) => {
               </div>
             );
           })}
-        </Slider>
+        </Slider> */}
       </div>
     </SectionHeroStyles>
     // </FadeIn>

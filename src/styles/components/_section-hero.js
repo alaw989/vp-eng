@@ -39,6 +39,59 @@ export const SectionHeroStyles = styled.div`
       }
     }
 
+    @keyframes scale {
+      0% {
+        transform: scale(1.4);
+      }
+
+      50% {
+        transform: scale(1.3);
+      }
+
+      100% {
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes unscale {
+      0% {
+        transform: scale(1.2);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .home-carousel {
+      height: 100%;
+      position: relative;
+      overflow: hidden; 
+      .bg-container {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        opacity: 0;
+        animation: unscale 9s;
+        animation-timing-function: linear;
+        transition: 9s all;
+        transform: scale(1.2);
+        &.showing {
+          opacity: 1;
+          animation: scale 9s;
+          animation-timing-function: linear;
+          transition: 9s all;
+        }
+        .background {
+          height: 100%;
+        }
+      }
+    }
+
     .hero-title-container {
       position: absolute;
       height: 300px;
@@ -54,7 +107,7 @@ export const SectionHeroStyles = styled.div`
         position: absolute;
         z-index: 1;
         color: ${colors.white};
-        height: 100%;
+
         display: flex;
         justify-content: center;
         align-items: center;
@@ -185,48 +238,18 @@ export const SectionHeroStyles = styled.div`
         }
       }
     }
-    
 
     .slick-slide {
-      height: 100vh;
+      /* height: 100vh;
 
       @media ${device.lg} {
         height: 100vh;
-      }
-
-      @keyframes scale {
-        0% {
-          transform: scale(1.4);
-        }
-
-        50% {
-          transform: scale(1.3);
-        }
-
-        100% {
-          transform: scale(1.2);
-        }
-      }
-
-      @keyframes unscale {
-        0% {
-          transform: scale(1.2);
-        }
-
-        50% {
-          transform: scale(1.1);
-        }
-
-        100% {
-          transform: scale(1);
-        }
-      }
+      } */
 
       &.slick-active {
         .slider-container {
-    
+          display: block;
           .bgSlide {
-           
             animation: scale 9s;
             animation-timing-function: linear;
             transition: 9s all;
@@ -235,7 +258,6 @@ export const SectionHeroStyles = styled.div`
       }
 
       .slider-container {
-   
         .bgSlide {
           background-attachment: fixed;
           background-repeat: no-repeat;
@@ -248,7 +270,7 @@ export const SectionHeroStyles = styled.div`
           position: absolute !important;
           top: 0;
           left: 0;
-          width: 100% !important;
+          width: 100%;
 
           &:after {
             /* transform: translateY(${(props) => props.offsetY}px); */
@@ -315,7 +337,7 @@ export const SectionHeroStyles = styled.div`
       z-index: 1;
     }
 
-    .slick-slider {
+    /* .slick-slider {
       .slick-list {
         height:100%;
         .slick-track {
@@ -329,15 +351,15 @@ export const SectionHeroStyles = styled.div`
           }
         }
       }
-    }
+    } */
 
-    .slick-slider.slick-initialized {
+    /* .slick-slider.slick-initialized {
       overflow: hidden;
       height: 100vh;
       @media ${device.lg} {
         height: 100vh;
       }
-    }
+    } */
 
     .overlay {
       position: absolute;
