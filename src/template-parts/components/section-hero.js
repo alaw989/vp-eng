@@ -1,16 +1,14 @@
 import { useStaticQuery, graphql } from "gatsby";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SectionHeroStyles } from "../../styles/components/_section-hero.js";
-// import Slider from "react-slick";
 // import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import BackgroundImage from "gatsby-background-image";
-
 import { convertToBgImage } from "gbimage-bridge";
 import parse from "html-react-parser";
 import plus from "../../images/plus-icon.png";
 
-// import { useInView } from "react-intersection-observer"
-// import { inViewContext, yOffsetContext } from "../Contexts/siteContext"
+import { useInView } from "react-intersection-observer";
+import { inViewContext, yOffsetContext } from "../../contexts/site-context";
 // import FadeIn from "react-fade-in"
 
 const SectionHero = () => {
@@ -43,50 +41,57 @@ const SectionHero = () => {
     }
   `);
 
-
   const home_slider =
     data.allWp.nodes[0].themeOptions.acfThemeOptions.homepage.heroSlider;
 
   const [index, setIndex] = useState(1);
 
-  //   const { ref, inView, entry } = useInView({
-  //     threshold: 0,
-  //   })
-  //   const view = inView ? "view-on" : "view-off"
+  const { ref, inView, entry } = useInView({
+    threshold: 0,
+  });
+  const view = inView ? "view-on" : "view-off";
 
-  //   const { setHeroView } = useContext(inViewContext)
-  //   setHeroView(inView)
+  const { setHeroView } = useContext(inViewContext);
 
   // Page Y Offset State
-  //   const { offsetY } = useContext(yOffsetContext)
+  const { offsetY } = useContext(yOffsetContext);
 
   let [count, setCount] = useState(0);
-  const [active, setActive] = useState("active");
+
   useEffect(() => {
+    setHeroView(inView);
     const countUp = () => {
       setCount((count += 1));
-      active === "active" ? setActive("active2") : setActive("active");
-   
-      if (count == 2) {
-        count = -1
+      if (count == home_slider.length - 1) {
+        count = -1;
       }
     };
 
-   setInterval(countUp, 9000);
-  
+    setInterval(countUp, 9000);
   }, []);
-  console.log(active)
+
   return (
     // <FadeIn transitionDuration={2000}>
     <SectionHeroStyles>
       <div className="section-hero" /* ref={ref} */>
+        <div className="bgtext-container">
+          {home_slider.map((slide, index) => (
+            <div
+              key={index}
+              className={`bgtext ${index === count ? "showing" : ""}`}
+            >
+              <p>{parse(slide.text)}</p>
+            </div>
+          ))}
+        </div>
+
         <div className="overlay"></div>
         <div className="hero-title-container">
           <div
             //   data-view={view}
             className="hero-title"
             style={{
-              // transform: `translate(0, -${offsetY * 0.5}px)`,
+              transform: `translate(0, -${offsetY * 0.5}px)`,
               transition: `.5s all`,
             }}
           >
@@ -108,7 +113,7 @@ const SectionHero = () => {
             }}
           >
             <div className="progress-bar">
-              <div className="progress-inner" data-active={active}></div>
+              <div className="progress-inner"></div>
             </div>
             <div className="slide-number">{count + 1}</div>
           </div>
@@ -137,34 +142,10 @@ const SectionHero = () => {
                 >
                   {" "}
                 </BackgroundImage>
-                <div className="bgText">{parse(slide.text)}</div>
               </div>
             );
           })}
         </div>
-
-        {/* <Slider {...settings}>
-          {home_slider.map((slide, index) => {
-            const image = slide.image.localFile.childImageSharp.gatsbyImageData;
-            const bgImage = convertToBgImage(image);
-            return (
-              <div className="slider-container" key={index}>
-                <BackgroundImage
-                  {...bgImage}
-                  backgroundColor={`#040e18`}
-                  className="bgSlide"
-                  style={{
-                    // backgroundPosition: `0px -${offsetY * 0.3}px`,
-                    backgroundSize: `cover`,
-                  }}
-                >
-                  {" "}
-                </BackgroundImage>
-                <div className="bgText">{parse(slide.text)}</div>
-              </div>
-            );
-          })}
-        </Slider> */}
       </div>
     </SectionHeroStyles>
     // </FadeIn>

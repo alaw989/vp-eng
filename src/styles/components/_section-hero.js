@@ -67,10 +67,31 @@ export const SectionHeroStyles = styled.div`
       }
     }
 
+    .bgtext-container {
+      position: absolute;
+      z-index: 99;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      bottom: 50px;
+      display: flex;
+      justify-content: center;
+      color: #fff;
+    
+      .bgtext {
+        position: absolute;
+        opacity: 0; 
+        transition: .5s all;
+        &.showing {
+          opacity: 1;
+        }
+      }
+    }
+
     .home-carousel {
       height: 100%;
       position: relative;
-      overflow: hidden; 
+      overflow: hidden;
       .bg-container {
         height: 100%;
         position: absolute;
@@ -219,14 +240,8 @@ export const SectionHeroStyles = styled.div`
             transition: 9s all;
             height: 0;
             animation: progress 9s;
-            &[data-active="active"] {
-              animation: progress 9s;
-              animation-timing-function: linear;
-            }
-            &[data-active="active2"] {
-              animation: progress2 9s;
-              animation-timing-function: linear;
-            }
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
           }
         }
         .slide-number {
@@ -235,74 +250,6 @@ export const SectionHeroStyles = styled.div`
           left: -3px;
           color: ${colors.white};
           font-size: 1rem;
-        }
-      }
-    }
-
-    .slick-slide {
-      /* height: 100vh;
-
-      @media ${device.lg} {
-        height: 100vh;
-      } */
-
-      &.slick-active {
-        .slider-container {
-          display: block;
-          .bgSlide {
-            animation: scale 9s;
-            animation-timing-function: linear;
-            transition: 9s all;
-          }
-        }
-      }
-
-      .slider-container {
-        .bgSlide {
-          background-attachment: fixed;
-          background-repeat: no-repeat;
-          background-size: cover;
-          height: 100vh;
-          animation: unscale 9s;
-          animation-timing-function: linear;
-          transition: 9s all;
-          transform: scale(1.2);
-          position: absolute !important;
-          top: 0;
-          left: 0;
-          width: 100%;
-
-          &:after {
-            /* transform: translateY(${(props) => props.offsetY}px); */
-            transition: 0.5s all;
-            background-attachment: fixed;
-          }
-        }
-
-        .bgText {
-          color: ${colors.white};
-          position: absolute;
-          z-index: 99;
-          top: 95%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 1rem;
-          font-weight: 400;
-          text-align: center;
-          line-height: 1rem;
-          transition: all 1s ease;
-          @media ${device.lg} {
-            font-size: 1.2rem;
-            line-height: 3rem;
-          }
-          span {
-            /* color: #fff;
-          -webkit-text-fill-color: transparent;
-          -webkit-text-stroke-width: 1px;
-          -webkit-text-stroke-color: #fff;
-          @media ${device.lg} {
-            -webkit-text-stroke-width: 3px; */
-          }
         }
       }
     }
@@ -329,43 +276,11 @@ export const SectionHeroStyles = styled.div`
       }
     }
 
-    svg {
-      position: absolute;
-      width: 100%;
-      bottom: -1px;
-      left: 0;
-      z-index: 1;
-    }
-
-    /* .slick-slider {
-      .slick-list {
-        height:100%;
-        .slick-track {
-          position: relative;
-     
-          .slick-slide {
-            position: absolute;
-            left: 0 !important;
-            top: 0;
-            height: 100%;
-          }
-        }
-      }
-    } */
-
-    /* .slick-slider.slick-initialized {
-      overflow: hidden;
-      height: 100vh;
-      @media ${device.lg} {
-        height: 100vh;
-      }
-    } */
-
     .overlay {
       position: absolute;
       width: 100%;
       height: 100vh;
-      z-index: 1;
+      z-index: 2;
       top: 0;
       left: 0;
       background-color: rgba(38, 67, 102, 0.4);

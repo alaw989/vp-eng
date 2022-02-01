@@ -3,57 +3,27 @@ import React, { useContext } from "react";
 import Mmenu from "./Mmenu";
 import { SectionHeaderStyles } from "../../styles/components/_section-header.js";
 import plus from "../../images/plus-icon.png";
-// import { useInView } from "react-intersection-observer"
+import { useInView } from "react-intersection-observer"
 import { Container, Row, Col } from "react-bootstrap";
-// import { inViewContext } from "../Contexts/siteContext"
+import { inViewContext } from "../../contexts/site-context"
 
 const SectionHeader = (props) => {
-  // const data = useStaticQuery(graphql`
-  //   query newQuery {
-  //     allWordpressWpApiMenusMenusItems {
-  //       ...wordpress__wp_api_menus_menus_itemsConnectionFragment
-  //     }
-  //     allWordpressAcfOptions {
-  //       nodes {
-  //         options {
-  //           phone_number
-  //           logo_alt {
-  //             localFile {
-  //               childImageSharp {
-  //                 fixed(width: 120, height: 85) {
-  //                   ...GatsbyImageSharpFixed
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `)
 
-  //   const tel = "tel:"
 
-  //   const logo =
-  //     data.allWordpressAcfOptions.nodes[0].options.logo_alt.localFile
-  //       .childImageSharp.fixed
-  // const menuItems = data.allWordpressWpApiMenusMenusItems.edges[0].node.items
-  // const phone = data.allWordpressAcfOptions.nodes[0].options.phone_number
+    const { heroView, aboutIntroView } = useContext(inViewContext)
 
-  //   const { heroView, aboutIntroView } = useContext(inViewContext)
-
-  // console.log("hero in view", heroView)
+  console.log("hero in view", heroView)
   // console.log("about intro 1 in view", aboutIntroView)
 
-  //   const heroShown = heroView ? "in-view" : "not-in-view"
-  //   const aboutShown = aboutIntroView ? "in-view" : "not-in-view"
+    const heroShown = heroView ? "in-view" : "not-in-view"
+    const aboutShown = aboutIntroView ? "in-view" : "not-in-view"
 
   return (
     <SectionHeaderStyles>
       <div
         className="nav-container"
-        // data-about-view={aboutShown}
-        // data-hero-view={heroShown}
+        data-about-view={aboutShown}
+        data-hero-view={heroShown}
       >
         <Container fluid>
           <Row className="justify-content-center">
