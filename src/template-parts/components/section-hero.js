@@ -1,14 +1,14 @@
-import { useStaticQuery, graphql } from "gatsby";
-import React, { useState, useEffect, useContext } from "react";
-import { SectionHeroStyles } from "../../styles/components/_section-hero.js";
-// import { getImage, GatsbyImage } from "gatsby-plugin-image";
-import BackgroundImage from "gatsby-background-image";
-import { convertToBgImage } from "gbimage-bridge";
-import parse from "html-react-parser";
-import plus from "../../images/plus-icon.png";
+import { useStaticQuery, graphql } from "gatsby"
+import React, { useState, useEffect, useContext } from "react"
+import { SectionHeroStyles } from "../../styles/components/_section-hero.js"
+// import { getImage, GatsbyImage } from "gatsby-plugin-image"
+import BackgroundImage from "gatsby-background-image"
+import { convertToBgImage } from "gbimage-bridge"
+import parse from "html-react-parser"
+import plus from "../../images/plus-icon.png"
 
-import { useInView } from "react-intersection-observer";
-import { inViewContext, yOffsetContext } from "../../contexts/site-context";
+import { useInView } from "react-intersection-observer"
+import { inViewContext, yOffsetContext } from "../../contexts/site-context"
 // import FadeIn from "react-fade-in"
 
 const SectionHero = () => {
@@ -39,36 +39,36 @@ const SectionHero = () => {
         }
       }
     }
-  `);
+  `)
 
   const home_slider =
-    data.allWp.nodes[0].themeOptions.acfThemeOptions.homepage.heroSlider;
+    data.allWp.nodes[0].themeOptions.acfThemeOptions.homepage.heroSlider
 
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(1)
 
   const { ref, inView, entry } = useInView({
     threshold: 0,
-  });
-  const view = inView ? "view-on" : "view-off";
+  })
+  const view = inView ? "view-on" : "view-off"
 
-  const { setHeroView } = useContext(inViewContext);
+  const { setHeroView } = useContext(inViewContext)
 
   // Page Y Offset State
-  const { offsetY } = useContext(yOffsetContext);
+  const { offsetY } = useContext(yOffsetContext)
 
-  let [count, setCount] = useState(0);
+  let [count, setCount] = useState(0)
 
   useEffect(() => {
-    setHeroView(inView);
+    setHeroView(inView)
     const countUp = () => {
-      setCount((count += 1));
+      setCount((count += 1))
       if (count == home_slider.length - 1) {
-        count = -1;
+        count = -1
       }
-    };
+    }
 
-    setInterval(countUp, 9000);
-  }, []);
+    setInterval(countUp, 9000)
+  }, [])
 
   return (
     // <FadeIn transitionDuration={2000}>
@@ -121,8 +121,8 @@ const SectionHero = () => {
 
         <div className="home-carousel">
           {home_slider.map((slide, index) => {
-            const image = slide.image.localFile.childImageSharp.gatsbyImageData;
-            const bgImage = convertToBgImage(image);
+            const image = slide.image.localFile.childImageSharp.gatsbyImageData
+            const bgImage = convertToBgImage(image)
 
             return (
               <div
@@ -143,13 +143,13 @@ const SectionHero = () => {
                   {" "}
                 </BackgroundImage>
               </div>
-            );
+            )
           })}
         </div>
       </div>
     </SectionHeroStyles>
     // </FadeIn>
-  );
-};
+  )
+}
 
-export default SectionHero;
+export default SectionHero

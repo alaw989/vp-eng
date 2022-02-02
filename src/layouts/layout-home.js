@@ -14,7 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SectionHero from "../template-parts/components/section-hero";
 import SectionAboutIntro from "../template-parts/components/section-about-intro"
 // import SectionAboutIntro2 from "./section-about-intro-2"
-// import SectionServices from "./section-services"
+import SectionServices from "../template-parts/components/section-services"
 // import "./layout.css"
 import { inViewContext, yOffsetContext } from "../contexts/site-context";
 
@@ -57,8 +57,8 @@ const LayoutHome = ({ children }) => {
           <SectionHero />
         </yOffsetContext.Provider>
         <SectionAboutIntro />
-            {/* <SectionServices />
-            <SectionAboutIntro2 /> */}
+             <SectionServices />
+          {/*  <SectionAboutIntro2 /> */}
         {/* </div> */}
         {children}
         {/* <div className="l-footer">
