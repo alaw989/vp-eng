@@ -5,18 +5,18 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useState } from "react";
+import React, { useState } from "react"
 // import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby";
-import SectionHeader from "../template-parts/components/section-header";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useStaticQuery, graphql } from "gatsby"
+import SectionHeader from "../template-parts/components/section-header"
+import "bootstrap/dist/css/bootstrap.min.css"
 // import SectionFooter from "./section-footer"
-import SectionHero from "../template-parts/components/section-hero";
+import SectionHero from "../template-parts/components/section-hero"
 import SectionAboutIntro from "../template-parts/components/section-about-intro"
 // import SectionAboutIntro2 from "./section-about-intro-2"
 import SectionServices from "../template-parts/components/section-services"
 // import "./layout.css"
-import { inViewContext, yOffsetContext } from "../contexts/site-context";
+import { inViewContext, yOffsetContext } from "../contexts/site-context"
 
 const LayoutHome = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -27,16 +27,17 @@ const LayoutHome = ({ children }) => {
         }
       }
     }
-  `);
+  `)
 
-  const [heroView, setHeroView] = useState();
-  const [aboutIntroView, setAboutIntroView] = useState();
-  const [aboutIntroView2, setAboutIntroView2] = useState();
+  const [heroView, setHeroView] = useState()
+  const [servicesView, setServicesView] = useState()
+  const [aboutIntroView, setAboutIntroView] = useState()
+  const [aboutIntroView2, setAboutIntroView2] = useState()
 
-  const [offsetY, setOffsetY] = useState(0);
-  
+  const [offsetY, setOffsetY] = useState(0)
+
   //   const handleScroll = () => setOffsetY(window.pageYOffset)
-  //   const home = "home";
+  //   const home = "home"
 
   return (
     <>
@@ -48,6 +49,8 @@ const LayoutHome = ({ children }) => {
           setAboutIntroView,
           aboutIntroView2,
           setAboutIntroView2,
+          servicesView,
+          setServicesView,
         }}
       >
         {/* <div className="l-wrapper">
@@ -57,8 +60,8 @@ const LayoutHome = ({ children }) => {
           <SectionHero />
         </yOffsetContext.Provider>
         <SectionAboutIntro />
-             <SectionServices />
-          {/*  <SectionAboutIntro2 /> */}
+        <SectionServices />
+        {/*  <SectionAboutIntro2 /> */}
         {/* </div> */}
         {children}
         {/* <div className="l-footer">
@@ -67,11 +70,11 @@ const LayoutHome = ({ children }) => {
         {/* </div> */}
       </inViewContext.Provider>
     </>
-  );
-};
+  )
+}
 
 // LayoutHome.propTypes = {
 //   children: PropTypes.node.isRequired,
 // }
 
-export default LayoutHome;
+export default LayoutHome

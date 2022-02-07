@@ -1,7 +1,6 @@
 import { useStaticQuery, graphql } from "gatsby"
 import React, { useState, useEffect, useContext } from "react"
 import { SectionHeroStyles } from "../../styles/components/_section-hero.js"
-// import { getImage, GatsbyImage } from "gatsby-plugin-image"
 import BackgroundImage from "gatsby-background-image"
 import { convertToBgImage } from "gbimage-bridge"
 import parse from "html-react-parser"
@@ -46,7 +45,7 @@ const SectionHero = () => {
 
   const [index, setIndex] = useState(1)
 
-  const { ref, inView, entry } = useInView({
+  const { inView } = useInView({
     threshold: 0,
   })
   const view = inView ? "view-on" : "view-off"
@@ -62,7 +61,7 @@ const SectionHero = () => {
     setHeroView(inView)
     const countUp = () => {
       setCount((count += 1))
-      if (count == home_slider.length - 1) {
+      if (count === home_slider.length - 1) {
         count = -1
       }
     }
